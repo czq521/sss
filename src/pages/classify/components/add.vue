@@ -11,16 +11,16 @@
             <el-option label="顶级菜单" :value="0"></el-option>
             <!-- 动态循环添加 -->
             <el-option
-              v-for="item in menuList"
+              v-for="item in cateList"
               :key="item.id"
-              :label="item.title"
+              :label="item.catename"
               :value="item.id"
             ></el-option>
           </el-select>
         </el-form-item>
 
         <el-form-item label="分类名称" :label-width="width">
-          <el-input v-model="form.username" autocomplete="off"></el-input>
+          <el-input v-model="form.catename" autocomplete="off"></el-input>
         </el-form-item>
 
         <el-form-item label="图片" :label-width="width">
@@ -56,13 +56,13 @@
   </div>
 </template>
 <script>
-import { indexRouters } from "../../../router/index";
-import { reqMenuAdd, reqMenuListOne, reqMenuEdit } from "../../../util/request";
+// import { indexRouters } from "../../../router/index";
+import { reqCateAdd, reqCateListOne,reqCateEdit} from "../../../util/request";
 import { mapGetters, mapActions } from "vuex";
 export default {
   computed: {
     ...mapGetters({
-      menuList: "menu/list",
+      cateList: "cate/list",
     }),
   },
   props: ["info"],
@@ -73,20 +73,20 @@ export default {
       imageUrl:'',
       form: {
         pid: "",
-        title: "",
-        type: 0,
-        icon: "",
-        url: "",
+        catename:"",
+        img: null,
         status: 1,
       },
-      indexRouters: indexRouters,
+      // indexRouters: indexRouters,
     };
   },
   methods: {
 
     // 上传图片
-    changeImg(){
-      this.imageUrl = URL.createObjectURL(file.raw);
+    changeImg(e){
+      var file = e.raw
+      this.imageUrl = URL.createObjectURL(file);
+      this.form.img = file
     },
 
     // 取消弹框
@@ -94,48 +94,53 @@ export default {
       this.info.isShow = false;
     },
     ...mapActions({
-      requestMenuList: "menu/requestMenuList",
+      requestMenuList:'menu/requestMenuList',
+      requestCateList: "cate/requestCateList",
     }),
     // 重置
     empty() {
-      this.form = {
+      this.form= {
         pid: "",
-        title: "",
-        type: 0,
-        icon: "",
-        url: "",
+        catename:"",
+        img: null,
         status: 1,
-      };
+      },
+      this.imageUrl =''
     },
     // 添加操作
     add() {
-      reqMenuAdd(this.form).then((res) => {
+      reqCateAdd(this.form).then((res) => {
         this.hide();
         // 自动刷新
-        this.requestMenuList();
+        this.requestCateList();
       });
     },
     //修改type的状态
     changePid() {
-      this.form.type = this.form.pid == 0 ? 1 : 2;
+      // this.form.type = this.form.pid == 0 ? 1 : 2;
     },
     look(id) {
-      reqMenuListOne({ id: id }).then((res) => {
+      reqCateListOne({ id: id }).then((res) => {
         this.form = res.data.list;
         this.form.id = id;
+        this.imageUrl = this.$preImg+ res.data.list.img
       });
     },
     // 修改
     update() {
-      reqMenuEdit(this.form).then((res) => {
-        this.requestMenuList();
+      reqCateEdit(this.form).then((res) => {
+        this.requestCateList();
         this.info.isShow = false;
         this.empty();
       });
+      console.log(111);
     },
   },
 
-  mounted() {},
+  mounted() {
+    this.requestCateList()
+    this.requestMenuList()
+  },
 };
 </script>
 <style scoped>
@@ -156,6 +161,7 @@ export default {
     height: 178px;
     line-height: 178px;
     text-align: center;
+    border: 1px dashed #d9d9d9;
   }
   .avatar {
     width: 178px;

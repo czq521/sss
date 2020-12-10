@@ -149,3 +149,113 @@ export const requserCount=()=>{
         method:'get',
     })
 }
+
+
+///////////////////////////商品分类管理///////////////////////////////////
+// 商品分类添加
+export const reqCateAdd=(data)=>{
+    var form = new FormData()
+    for(var i in data){
+        form.append(i,data[i])
+    }
+    return axios({
+        url:baseUrl+'/api/cateadd',
+        method:'post',
+        data:form
+    })
+}
+
+// 商品分类列表
+export const reqCateList=(data)=>{
+    return axios({
+        url:baseUrl+'/api/catelist',
+        method:'get',
+        params:data
+    })
+}
+
+// 商品分类获取
+export const reqCateListOne=(id)=>{
+    return axios({
+        url:baseUrl+'/api/cateinfo',
+        method:'get',
+        params:id
+    })
+}
+
+//商品分类删除
+export const reqCateDel=(id)=>{
+    return axios({
+        url:baseUrl+'/api/catedelete',
+        method:'post',
+        data:id
+    })
+}
+
+//商品分类编辑
+export const reqCateEdit=(data)=>{
+    var form = new FormData()
+    for(var i in data){
+        form.append(i,data[i])
+    }
+    return axios({
+        url:baseUrl+'/api/cateedit',
+        method:'post',
+        data:form
+    })
+}
+
+
+///////////////////////////商品规格管理///////////////////////////////////
+// 商品规格添加
+export const reqspecsAdd=(data)=>{
+    return axios({
+        url:baseUrl+'/api/specsadd',
+        method:'post',
+        data:data
+    })
+}
+
+// 商品规格列表
+export const reqspecsList=(data)=>{
+    return axios({
+        url:baseUrl+'/api/specslist',
+        method:'get',
+        params:data
+    })
+}
+
+// 商品规格获取
+export const reqspecsListOne=(id)=>{
+    return axios({
+        url:baseUrl+'/api/specsinfo',
+        method:'get',
+        params:id
+    })
+}
+
+//商品规格删除
+export const reqspecsDel=(id)=>{
+    return axios({
+        url:baseUrl+'/api/specsdelete',
+        method:'post',
+        data:id
+    })
+}
+
+//商品规格编辑
+export const reqspecsEdit=(data)=>{
+    return axios({
+        url:baseUrl+'/api/specsedit',
+        method:'post',
+        data:data
+    })
+}
+
+//商品规格总数
+export const reqspecsCount=()=>{
+    return axios({
+        url:baseUrl+'/api/specscount',
+        method:'get',
+    })
+}

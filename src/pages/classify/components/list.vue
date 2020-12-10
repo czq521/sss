@@ -8,12 +8,15 @@ border
 default-expand-all
 :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
 >
-<el-table-column prop="id" label="菜单编号" sortable width="180">
+<el-table-column prop="id" label="分类编号" sortable width="180">
 </el-table-column>
-<el-table-column prop="title" label="菜单名称" sortable width="180">
+<el-table-column prop="catename" label="分类名称" sortable width="180">
 </el-table-column>
-<el-table-column prop="icon" label="菜单图标"> </el-table-column>
-<el-table-column label="菜单地址" prop="url"> </el-table-column>
+<el-table-column  label="图片" sortable width="180">
+    <template slot-scope="scope">
+        <img :src="$preImg+scope.row.img" alt="">
+    </template>
+</el-table-column>
 <el-table-column label="状态" prop="status">
 <!-- <el-button type="success" >启用</el-button>
 <el-button type="info">禁用</el-button> -->
@@ -33,11 +36,11 @@ default-expand-all
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex"
-import {reqMenuDel} from '../../../util/request'
+import {reqCateDel} from '../../../util/request'
 export default {
 computed: {
 ...mapGetters({
-list: "menu/list",
+list: "cate/list",
 }),
 },
 components: {},
@@ -46,7 +49,7 @@ return {};
 },
 methods: {
 ...mapActions({
-requestMenuList: "menu/requestMenuList",
+requestCateList: "cate/requestCateList",
 }),
 // 编辑
 edit(id) {
@@ -54,19 +57,22 @@ this.$emit("edit", id);
 },
 // 删除
 del(id){
-reqMenuDel({id:id}).then(res=>{
-this.requestMenuList()
-
-})
+    reqCateDel({id:id}).then(res=>{
+        this.requestCateList();
+    })
 }
 },
 mounted() {
-this.requestMenuList();
+this.requestCateList();
 },
 };
 </script>
 <style scoped>
 .box{
     margin-top: 20px;
+}
+img{
+    width: 100px;
+    height: 100px;
 }
 </style>

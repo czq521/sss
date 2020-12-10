@@ -99,9 +99,8 @@ export default {
     look(id) {
       reqRoleListOne({ id: id }).then((res) => {
         this.form = res.data.list;
-        this.form.menus = this.$refs.tree.setCheckedKeys(
-          JSON.parse(res.data.list.menus)
-        );
+        this.form.menus = this.$refs.tree.setCheckedKeys(JSON.parse(res.data.list.menus));
+        // console.log(  this.$refs.tree.setCheckedKeys(JSON.parse(res.data.list.menus)));
         this.form.id = id;
       });
     },
