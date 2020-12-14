@@ -10,7 +10,7 @@
           text-color="#fff"
           active-text-color="#ffd04b"
         >
-          <el-menu-item index="2">
+          <el-menu-item index="/index/home">
             <i class="el-icon-menu"></i>
             <span slot="title">首页</span>
           </el-menu-item>
@@ -112,5 +112,9 @@ body > .el-container {
 }
 ul li{
   width:150px ;
+}
+.el-aside[data-v-1badc801]{
+  height: auto;
+  min-height: 100vh;
 }
 </style>

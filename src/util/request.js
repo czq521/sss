@@ -259,3 +259,168 @@ export const reqspecsCount=()=>{
         method:'get',
     })
 }
+
+///////////////////////////商品管理///////////////////////////////////
+// 商品添加
+export const reqgoodsAdd=(data)=>{
+    var form=new FormData()
+    for(var i in data){
+        form.append(i,data[i])
+    }
+    return axios({
+        url:baseUrl+'/api/goodsadd',
+        method:'post',
+        data:form
+    })
+}
+
+// 商品列表
+export const reqgoodsList=(data)=>{
+    return axios({
+        url:baseUrl+'/api/goodslist',
+        method:'get',
+        params:data
+    })
+}
+
+// 商品获取
+export const reqgoodsListOne=(id)=>{
+    return axios({
+        url:baseUrl+'/api/goodsinfo',
+        method:'get',
+        params:id
+    })
+}
+
+//商品删除
+export const reqgoodsDel=(id)=>{
+    return axios({
+        url:baseUrl+'/api/goodsdelete',
+        method:'post',
+        data:id
+    })
+}
+
+//商品编辑
+export const reqgoodsEdit=(data)=>{
+    var form = new FormData()
+    for(var i in data){
+        form.append(i,data[i])
+    }
+    return axios({
+        url:baseUrl+'/api/goodsedit',
+        method:'post',
+        data:form
+    })
+}
+
+//商品总数
+export const reqgoodsCount=()=>{
+    return axios({
+        url:baseUrl+'/api/goodscount',
+        method:'get',
+    })
+}
+
+
+///////////////////////////轮播图管理///////////////////////////////////
+// 轮播图添加
+export const reqbannerAdd=(data)=>{
+    var form=new FormData()
+    for(var i in data){
+        form.append(i,data[i])
+    }
+    return axios({
+        url:baseUrl+'/api/banneradd',
+        method:'post',
+        data:form
+    })
+}
+
+// 轮播图列表
+export const reqbannerList=(data)=>{
+    return axios({
+        url:baseUrl+'/api/bannerlist',
+        method:'get',
+        params:data
+    })
+}
+
+// 轮播图获取
+export const reqbannerListOne=(id)=>{
+    return axios({
+        url:baseUrl+'/api/bannerinfo',
+        method:'get',
+        params:id
+    })
+}
+
+//轮播图删除
+export const reqbannerDel=(id)=>{
+    return axios({
+        url:baseUrl+'/api/bannerdelete',
+        method:'post',
+        data:id
+    })
+}
+
+//轮播图编辑
+export const reqbannerEdit=(data)=>{
+    var form = new FormData()
+    for(var i in data){
+        form.append(i,data[i])
+    }
+    return axios({
+        url:baseUrl+'/api/banneredit',
+        method:'post',
+        data:form
+    })
+}
+
+
+///////////////////////////限时秒杀管理///////////////////////////////////
+// 限时秒杀添加
+export const reqseckAdd=(data)=>{
+    return axios({
+        url:baseUrl+'/api/seckadd',
+        method:'post',
+        data:data
+    })
+}
+
+// 限时秒杀列表
+export const reqseckList=(data)=>{
+    return axios({
+        url:baseUrl+'/api/secklist',
+        method:'get',
+        params:data
+    })
+}
+
+// 限时秒杀获取
+export const reqseckListOne=(id)=>{
+    return axios({
+        url:baseUrl+'/api/seckinfo',
+        method:'get',
+        params:id
+    })
+}
+
+//限时秒杀删除
+export const reqseckDel=(id)=>{
+    return axios({
+        url:baseUrl+'/api/seckdelete',
+        method:'post',
+        data:id
+    })
+}
+
+//限时秒杀编辑
+export const reqseckEdit=(data)=>{
+    return axios({
+        url:baseUrl+'/api/seckedit',
+        method:'post',
+        data:data
+    })
+}
+
